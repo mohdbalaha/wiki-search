@@ -5,6 +5,9 @@
   <meta charset="utf-8" />
   <title>wiki search</title>
   <link rel="stylesheet" type="text/css" href="main.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Sigmar+One" rel="stylesheet">
 </head>
 
 <body>
@@ -14,9 +17,13 @@
 
   <section>
     <input id="search-term"></input>
-    <button id="search-btn" type="submit" onclick="clickButton()" active>search</button>
+    <button id="search-btn" class="btn btn-primary" type="submit" onclick="clickButton()" active>
+      <i class="fas fa-search"></i>
+    </button>
 
-    <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">random post</a>
+    <a id="random" href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" class="btn btn-info">
+      <i class="fas fa-random"></i>
+    </a>
   </section>
   <section id="list">
 
@@ -26,31 +33,30 @@
     <p>by: Mohamad Balaha</p>
   </footer>
   <script>
+    function clickButton() {
+      var searchTerm = document.getElementById("search-term").value.replace(/\s/g, '%20');
+      var url = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=" + searchTerm + "&callback=myfunc";
+      var s = document.createElement("script");
+      s.src = url;
+      document.body.appendChild(s);
+    }
 
-      function clickButton() {
-        var searchTerm = document.getElementById("search-term").value.replace(/\s/g, '%20');
-        var url = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=" + searchTerm + "&callback=myfunc";
-        var s = document.createElement("script");
-        s.src = url;
-        document.body.appendChild(s);
+    function myfunc(obj) {
+      let output = "";
+      for (let i = 0; i < obj[1].length; i++) {
+        output +=
+          '<div class="item"><a href="' +
+          obj[3][i] +
+          '" target="_blank">' +
+          obj[1][i] +
+          "</a>" +
+          "<p>" +
+          obj[2][i] +
+          "</p></div>";
       }
-
-      function myfunc(obj) {
-        let output = "";
-        for (let i = 0; i < obj[1].length; i++) {
-          output +=
-            '<div class="item"><a href="' +
-            obj[3][i] +
-            '" target="_blank">' +
-            obj[1][i] +
-            "</a>" +
-            "<p>" +
-            obj[2][i] +
-            "</p></div>";
-        }
-        document.getElementById("list").innerHTML = output;
-      }
-    </script>
+      document.getElementById("list").innerHTML = output;
+    }
+  </script>
 </body>
 
 </html>
