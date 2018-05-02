@@ -1,0 +1,40 @@
+body{
+    margin:0 10%;
+    background-color:#938584;
+  }
+  h1{
+    text-align:center;
+    margin-top:10%;
+    color:#514141;
+    font-family: 'Sigmar One', cursive;
+  }
+  #search-term{
+    width:70%;
+    margin:5% 0 7.5% 7.5%;
+  }
+  #search-btn{
+    width:7.5%;
+  }
+  #random{
+    width:7.5%;
+  }
+  .item{
+    border-left:3px #514141 solid;
+    margin:0 10% 5% 10%;
+    padding:2%;
+    background-color:#dfa868;
+    color:white;
+    opacity:0.7
+  }
+  .item a{
+    display:block;
+    color:#514141;
+    padding:1%;
+    font-size:120%;
+    font-family: 'Sigmar One', cursive;
+      text-align:center;
+  }
+  .item p{
+    
+  }
+  
